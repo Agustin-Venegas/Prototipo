@@ -2,32 +2,59 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyObject : MonoBehaviour
+public class EnemyObject : MonoBehaviour, IHurtable
 {
-    public float hp;    //Hit Points
-    public float maxHp; //Hit Points Máximos.
+    public int maxHp = 20; //Hit Points Máximos.
+    int hp;    //Hit Points
+
+    public Transform Target;
+
+    bool alarmed = false;
+
     // Start is called before the first frame update
     void Start()
     {
-        maxHp = 20; //Hp máximo igual a 20;
         hp = maxHp; //El hp inicial será igual a la cantidad máxima de hp.
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (hp <= 0)    //Si el hp es menor o igual a 0.
+
+    }
+
+    public bool IsAlive() { return hp > 0; }
+
+    public bool Hurt(int d)
+    {
+        hp -= d;
+
+        if (!IsAlive())
         {
-            Destroy(gameObject);    //Se destruye a si mismo.
+            Die();
+            return true;
+        }
+
+        return false;
+    }
+
+    void OnTriggerEnter2D(Collider2D coll)
+    {
+        if (coll.gameObject.GetComponent<PlayerObject>() != null)
+        {
+
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    public void Die()
     {
-        if (collision.gameObject.CompareTag("Bullet"))
-        {
-            hp -= 5;
-            Destroy(collision.gameObject);
-        }
+        Destroy(gameObject);
+    }
+
+    private void RotateTowardsTarget()
+    {
+        float angle = Mathf.Atan2(Target.position.y - transform.position.y, Target.position.x - transform.position.x) * Mathf.Rad2Deg;
+        Quaternion targetRotation = Quaternion.Euler(new Vector3(0, 0, angle));
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 15 * Time.deltaTime);
     }
 }

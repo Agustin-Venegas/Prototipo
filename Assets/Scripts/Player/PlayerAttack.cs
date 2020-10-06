@@ -7,25 +7,41 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
+    [Header("Partes")]
     public Transform firePoint;
-    public GameObject bulletPrefab;
+    public AttackContainer attack;
+    public AttackContainer DefaultAttack;
+    public HabilidadEspecial special;
 
-    public float bulletForce = 20f;
-
+    [Header("Vars")]
+    public bool CanPickupWeapons = true;
+    public bool ActivateSpecialOnShoot = false;
 
     // Update is called once per frame
     void Update()
     {
         if(Input.GetButtonDown("Fire1"))
         {
-            Shoot();
+            if (attack != null)
+            {
+                if (attack.CanShoot()) attack.Shoot(firePoint);
+                if (ActivateSpecialOnShoot) special.Activate();
+            }
+            else
+            {
+                DefaultAttack.Shoot();
+                if (ActivateSpecialOnShoot) special.Activate();
+            }
+        }
+
+        if (Input.GetButtonDown("Fire2"))
+        {
+            if (special != null) special.Activate();
         }
     }
 
-    void Shoot()
+    public void AsignAttack(AttackContainer other)
     {
-        GameObject bullet = Instantiate(bulletPrefab, firePoint.position + (firePoint.transform.up * 0.8f), firePoint.rotation);
-        Rigidbody2D rgb2 = bullet.GetComponent<Rigidbody2D>();
-        rgb2.AddForce(firePoint.up * bulletForce, ForceMode2D.Impulse);
+        attack = other;
     }
 }

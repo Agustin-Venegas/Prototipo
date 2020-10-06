@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 7968017237664109212}
   - component: {fileID: 5452011372243729373}
   - component: {fileID: 789227871092239659}
+  - component: {fileID: 7628964188070734599}
   m_Layer: 0
   m_Name: player
   m_TagString: Untagged
@@ -116,13 +117,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firePoint: {fileID: 4646273243384345492}
-  bulletPrefab: {fileID: 0}
-  SpecialPrefab: {fileID: 0}
+  attack: {fileID: 0}
+  DefaultAttack: {fileID: 0}
+  special: {fileID: 0}
   CanPickupWeapons: 1
-  ActivatesSpecialOnAttack: 0
-  Cooldown: 0.5
-  UsesAmmo: 0
-  Max_Ammo: 0
+  ActivateSpecialOnShoot: 0
 --- !u!114 &7968017237664109212
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -152,8 +151,8 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_LinearDrag: 5
+  m_AngularDrag: 5
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
@@ -188,3 +187,24 @@ PolygonCollider2D:
     - - {x: 0.6214042, y: -0.5170915}
       - {x: 0.0114542395, y: 0.5656972}
       - {x: -0.5984358, y: -0.52122426}
+--- !u!114 &7628964188070734599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 86392810186853537}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e44ab87965cd0f4d7b4278c2014af55b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 1153519473551830265, guid: 4486996bb71b1d26e833539201e154a7,
+    type: 3}
+  IsMelee: 1
+  Cooldown: 0.3
+  UsesAmmo: 0
+  Max_Ammo: 0
+  OnShoot:
+    m_PersistentCalls:
+      m_Calls: []
