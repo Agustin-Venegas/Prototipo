@@ -44,7 +44,7 @@ public class PlayerMovements : MonoBehaviour
     Vector2 mousePos;
 
 
-
+    public static PlayerMovements Instance;
 
     // Start is called before the first frame update
     void Start()
@@ -61,6 +61,8 @@ public class PlayerMovements : MonoBehaviour
         rg2d = GetComponent<Rigidbody2D>();     //Rigidbody2D del portador del script.
 
         dashForce = speed * 0.8f;  //La fuerza será proporcional a la aceleración, multiplicada por un numero.
+
+        Instance = this;
     }
 
     // Update is called once per frame

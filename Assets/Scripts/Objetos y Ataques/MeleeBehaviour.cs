@@ -50,7 +50,7 @@ public class MeleeBehaviour : MonoBehaviour
     {
         IHurtable hurt = coll.gameObject.GetComponent<IHurtable>() as IHurtable;
 
-        if (hurt != null)
+        if (hurt != null && coll.isTrigger == false)
         {
             hurt.Hurt(Damage);
 

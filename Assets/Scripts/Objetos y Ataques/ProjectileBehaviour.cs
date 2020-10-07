@@ -20,6 +20,9 @@ public class ProjectileBehaviour : MonoBehaviour
     public int Damage = 10;
     public float SpeedMultiplier = 20f;
     public bool DieOnImpact = false;
+    public float Time_Alive = 1f; //tiempo vivo
+
+    float timer = 0;
 
     [Header("Al Impactar")]
     public UnityEvent OnHit;
@@ -27,25 +30,38 @@ public class ProjectileBehaviour : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GetComponent<Rigidbody2D>().AddForce(transform.up * SpeedMultiplier);
+        GetComponent<Rigidbody2D>().velocity = (transform.up * SpeedMultiplier);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        timer += Time.deltaTime;
+
+        if (timer >= Time_Alive)
+        {
+            OnHit.Invoke();
+            Destroy(gameObject);
+        }
     }
 
     void OnTriggerEnter2D(Collider2D coll)
     {
         IHurtable hurt = coll.gameObject.GetComponent<IHurtable>();
 
-        if (hurt != null)
+        if (hurt != null && coll.isTrigger == false)
         {
             hurt.Hurt(Damage);
             OnHit.Invoke();
 
             if (DieOnImpact) Destroy(gameObject);
+        }
+        else
+        {
+            if (coll.isTrigger == false)
+            {
+                if (DieOnImpact) Destroy(gameObject);
+            }
         }
     }
 }

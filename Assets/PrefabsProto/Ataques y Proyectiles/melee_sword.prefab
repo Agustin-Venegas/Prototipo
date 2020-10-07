@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7950847168426200231}
   - component: {fileID: 8709576679862453974}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: melee_sword
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,7 +92,7 @@ GameObject:
   - component: {fileID: 1971718665099997108}
   - component: {fileID: 7365312230986455784}
   - component: {fileID: 5377166599569502838}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: melee_sword
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -128,7 +128,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Manguito: {fileID: 1971718665099997108}
   Angle: 90
-  Timer: 0.3
+  Timer: 0.2
   Damage: 5
   DespawnsOnHit: 1
 --- !u!61 &5377166599569502838

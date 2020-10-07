@@ -51,12 +51,12 @@ public class AttackContainer : MonoBehaviour
     {
         if (IsMelee)
         {
-            GameObject swing = Instantiate(bulletPrefab, transform.position + (transform.up * 0.8f), transform.rotation, gameObject.transform);
+            GameObject swing = Instantiate(bulletPrefab, transform.position + (transform.up), transform.rotation, gameObject.transform);
             swing.transform.SetParent(gameObject.transform, true);
         }
         else
         {
-            Instantiate(bulletPrefab, transform.position + (transform.up * 0.8f), transform.rotation);
+            Instantiate(bulletPrefab, transform.position + (transform.up), transform.rotation);
         }
 
         timer = Cooldown;
@@ -68,12 +68,12 @@ public class AttackContainer : MonoBehaviour
     {
         if (IsMelee)
         {
-            GameObject swing = Instantiate(bulletPrefab, firePoint.position + (firePoint.up * 0.8f), firePoint.rotation, firePoint);
+            GameObject swing = Instantiate(bulletPrefab, firePoint.position + (firePoint.up), firePoint.rotation, firePoint);
             swing.transform.SetParent(firePoint, true);
         }
         else
         {
-            Instantiate(bulletPrefab, firePoint.position + (firePoint.up * 0.8f), firePoint.rotation);
+            Instantiate(bulletPrefab, firePoint.position + (firePoint.up), firePoint.rotation);
         }
 
         timer = Cooldown;

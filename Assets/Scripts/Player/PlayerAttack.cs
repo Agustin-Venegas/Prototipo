@@ -29,7 +29,7 @@ public class PlayerAttack : MonoBehaviour
             }
             else
             {
-                DefaultAttack.Shoot();
+                if (DefaultAttack.CanShoot()) DefaultAttack.Shoot();
                 if (ActivateSpecialOnShoot) special.Activate();
             }
         }
