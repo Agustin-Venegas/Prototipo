@@ -39,7 +39,7 @@ public class PlayerMovements : MonoBehaviour
     public float dashForce; //Fuerza de impulso.
 
     /**********************/
-    public Camera cam;
+    public Camera cam = null;
     Vector2 movementVec;
     Vector2 mousePos;
 
@@ -63,6 +63,11 @@ public class PlayerMovements : MonoBehaviour
         dashForce = speed * 0.8f;  //La fuerza será proporcional a la aceleración, multiplicada por un numero.
 
         Instance = this;
+
+        if (cam == null)
+        {
+            cam = Camera.main;
+        }
     }
 
     // Update is called once per frame

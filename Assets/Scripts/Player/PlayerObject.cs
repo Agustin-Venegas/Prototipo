@@ -37,9 +37,7 @@ public class PlayerObject : MonoBehaviour, IHurtable
         {
             if (paused)
             {
-                Time.timeScale = 1;
-                paused = false; 
-                Pause.SetActive(false);
+                Continue();
             }
             else
             {
@@ -80,5 +78,12 @@ public class PlayerObject : MonoBehaviour, IHurtable
     public void Die()
     {
         Destroy(gameObject);
+    }
+
+    public void Continue()
+    {
+        Time.timeScale = 1;
+        paused = false;
+        Pause.SetActive(false);
     }
 }
