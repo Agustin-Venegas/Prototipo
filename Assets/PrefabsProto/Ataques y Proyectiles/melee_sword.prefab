@@ -129,7 +129,7 @@ MonoBehaviour:
   Manguito: {fileID: 1971718665099997108}
   Angle: 90
   Timer: 0.2
-  Damage: 5
+  Damage: 10
   DespawnsOnHit: 1
 --- !u!61 &5377166599569502838
 BoxCollider2D:

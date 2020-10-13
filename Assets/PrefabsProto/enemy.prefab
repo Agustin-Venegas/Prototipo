@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 5608420036881523007}
   - component: {fileID: 4099252971015566743}
   - component: {fileID: 2444291564080759015}
+  - component: {fileID: 9214764863673366103}
   m_Layer: 2
   m_Name: enemy
   m_TagString: Untagged
@@ -101,6 +102,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHp: 20
   attack: {fileID: 5608420036881523007}
+  cond: {fileID: 9214764863673366103}
 --- !u!58 &3589609997470304532
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -155,7 +157,9 @@ MonoBehaviour:
   IsMelee: 0
   Cooldown: 0.5
   UsesAmmo: 1
-  Max_Ammo: 60
+  Max_Ammo: 17
+  img: {fileID: 21300000, guid: bb5d8fc2d0d64fb2a8af7e6d5278805e, type: 3}
+  Descripcion: S & W PDW
   OnShoot:
     m_PersistentCalls:
       m_Calls: []
@@ -201,6 +205,19 @@ PolygonCollider2D:
   m_Points:
     m_Paths:
     - - {x: -0.004804492, y: 0.51039994}
-      - {x: 2.0107427, y: 3.6156657}
-      - {x: 0.068449974, y: 3.9817023}
-      - {x: -1.7554572, y: 3.4952745}
+      - {x: 4.335147, y: 5.4232044}
+      - {x: 0.02777505, y: 6.65432}
+      - {x: -3.9697425, y: 5.4188848}
+--- !u!114 &9214764863673366103
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1324172057359124266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e0b1e418a6a69091ad4b76671d0ce7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  completada: 0

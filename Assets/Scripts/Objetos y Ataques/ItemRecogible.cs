@@ -6,7 +6,8 @@ using UnityEngine;
 
 public class ItemRecogible : MonoBehaviour
 {
-    public InventoryItem itemDado;
+    public AttackContainer itemDado;
+    bool touched = false;
 
     void Start()
     {
@@ -16,22 +17,34 @@ public class ItemRecogible : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (touched)
+            if (Input.GetButtonDown("Fire2"))
+            {
+                PlayerAttack.Instance.AsignAttack(itemDado);
+
+                Destroy(gameObject);
+            }
     }
 
     void OnTriggerEnter2D(Collider2D coll) 
     {
         if (coll.gameObject.GetComponent<PlayerObject>() != null) 
         {
-            PlayerInventory.Instance.Add(itemDado);
-
-            Destroy(gameObject);
+            touched = true;
         }
     }
 
-    public void AsignarObjeto(InventoryItem i) //funcion innecesaria pero me sirve pa recordar todo
+    void OnTriggerExit2D(Collider2D coll)
     {
-        itemDado = i; //no se si esto funcione
-        //es bastante probable que con esto, crear muchos objetos genere hoyos en la memoria
+        if (coll.gameObject.GetComponent<PlayerObject>() != null)
+        {
+            touched = false;
+        }
+    }
+
+
+    public void AsignarObjeto(InventoryItem i)
+    {
+
     }
 }

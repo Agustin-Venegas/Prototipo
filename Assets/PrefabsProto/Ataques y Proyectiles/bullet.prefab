@@ -96,9 +96,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cab41b0fc20bd3b9a5a53873c5df8b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Damage: 10
+  Damage: 4
   SpeedMultiplier: 10
   DieOnImpact: 1
+  Time_Alive: 1
   OnHit:
     m_PersistentCalls:
       m_Calls: []

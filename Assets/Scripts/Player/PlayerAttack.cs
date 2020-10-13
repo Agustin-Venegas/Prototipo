@@ -12,10 +12,18 @@ public class PlayerAttack : MonoBehaviour
     public AttackContainer attack;
     public AttackContainer DefaultAttack;
     public HabilidadEspecial special;
+    public HUD hud;
 
     [Header("Vars")]
     public bool CanPickupWeapons = true;
     public bool ActivateSpecialOnShoot = false;
+
+    public static PlayerAttack Instance;
+
+    void Start()
+    {
+        Instance = this;
+    }
 
     // Update is called once per frame
     void Update()
@@ -32,16 +40,39 @@ public class PlayerAttack : MonoBehaviour
                 if (DefaultAttack.CanShoot()) DefaultAttack.Shoot();
                 if (ActivateSpecialOnShoot) special.Activate();
             }
+
+            UpdateHUD();
         }
 
         if (Input.GetButtonDown("Fire2"))
         {
-            if (special != null) special.Activate();
+            if (CanPickupWeapons && attack != null)
+            {
+                LanzarArma();
+            }
+            else
+            {
+                if (special != null) special.Activate();
+            }
         }
     }
 
     public void AsignAttack(AttackContainer other)
     {
         attack = other;
+        hud.UpdateWeapon(attack.getAmmo(), attack.Max_Ammo, attack.Descripcion, attack.img, attack.UsesAmmo);
+    }
+
+    public void UpdateHUD()
+    {
+        if (attack != null)
+        {
+            if (attack.UsesAmmo) hud.UpdateWeapon(attack.getAmmo(), attack.Max_Ammo);
+        }
+    }
+
+    public void LanzarArma()
+    {
+
     }
 }

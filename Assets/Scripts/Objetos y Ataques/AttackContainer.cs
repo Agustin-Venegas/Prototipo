@@ -15,12 +15,18 @@ public class AttackContainer : MonoBehaviour
     [Header("Variables del ataque")]
     public float Cooldown = 0.5f;
     public bool UsesAmmo = false; //si el ataque usa municion
-    public int Max_Ammo; //solo se usa si el bool anterior es true
+    public int Max_Ammo = 0; //solo se usa si el bool anterior es true
+
+    [Header("Partes para HUD")]
+    public Sprite img;
+    public string Descripcion;
 
     [Header("Al Disparar")]
     public UnityEvent OnShoot;
 
-    int ammo;
+    int ammo = 0;
+    public int getAmmo() { return ammo; }
+
     float timer = 0;
 
     // Start is called before the first frame update
@@ -80,6 +86,4 @@ public class AttackContainer : MonoBehaviour
 
         OnShoot.Invoke();
     }
-
-    public int GetAmmo() { return ammo; }
 }

@@ -10,6 +10,7 @@ public class EnemyObject : MonoBehaviour, IHurtable
 
     [Header("Partes")]
     public AttackContainer attack;
+    public Condicion cond;
 
     GameObject Target;
     bool alarmed = false;
@@ -76,7 +77,10 @@ public class EnemyObject : MonoBehaviour, IHurtable
 
     public void Die()
     {
-        Destroy(gameObject);
+        enabled = false;
+        gameObject.SetActive(false);
+        cond.completada = true;
+        MisionManager.Instance.CheckComplete();
     }
 
     private void RotateTowardsTarget()

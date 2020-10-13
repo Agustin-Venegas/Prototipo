@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 
 //Objeto Jugador
 
@@ -11,7 +11,6 @@ public class PlayerObject : MonoBehaviour, IHurtable
 
     [Header("Estadisticas Primarias")]
     public int HP_Max;
-
     private int hp;
 
     [Header("SubPartes")]
@@ -19,7 +18,9 @@ public class PlayerObject : MonoBehaviour, IHurtable
     public PlayerAttack attack;
 
     [Header("UIs")]
+    public HUD hud;
     public GameObject Pause;
+    public GameObject Death;
 
     bool paused = false;
 
@@ -54,6 +55,8 @@ public class PlayerObject : MonoBehaviour, IHurtable
     {
         hp -= d;
 
+        hud.UpdateHealth(hp, HP_Max);
+
         if (hp <= 0)
         {
             Die();
@@ -73,11 +76,14 @@ public class PlayerObject : MonoBehaviour, IHurtable
         {
             hp += h;
         }
+
+        hud.UpdateHealth(hp, HP_Max);
     }
 
     public void Die()
     {
-        Destroy(gameObject);
+        gameObject.SetActive(false);
+        Instantiate(Death);
     }
 
     public void Continue()

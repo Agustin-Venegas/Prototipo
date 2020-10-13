@@ -25,7 +25,15 @@ public class HabilidadSpawner : HabilidadEspecial
     // Update is called once per frame
     void Update()
     {
-        if (timer > 0) timer -= Time.deltaTime;
+        if (timer > 0)
+        {
+            timer -= Time.deltaTime;
+            if (uses_cooldown) hud_text.text = "loading " + (1f - timer / cooldown) * 100f;
+        }
+        else
+        {
+            if (uses_cooldown) hud_text.text = "ready";
+        }
     }
 
     public override void Activate()
