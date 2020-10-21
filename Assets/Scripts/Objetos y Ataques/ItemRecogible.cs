@@ -20,9 +20,11 @@ public class ItemRecogible : MonoBehaviour
         if (touched)
             if (Input.GetButtonDown("Fire2"))
             {
-                PlayerAttack.Instance.AsignAttack(itemDado);
-
-                Destroy(gameObject);
+                if (PlayerAttack.Instance.CanPickupWeapons) 
+                {  
+                    PlayerAttack.Instance.AsignAttack(itemDado);
+                    Destroy(gameObject);
+                }
             }
     }
 

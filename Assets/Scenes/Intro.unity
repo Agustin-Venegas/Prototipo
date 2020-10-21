@@ -171,7 +171,10 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Equipo 10\nIntegrantes: \nJoaquin Alonso\nBastian Murgas y \nAgustin Venegas"
+  m_Text: "Equipo 10\nIntegrantes: \nJoaquin Alonso\nBastian Murgas y \nAgustin Venegas\n\nPrueba
+    de Mecanica: Corte temporal\nHabilidad Desbloqueable en el juego\nPresiona Click
+    Derecho durante el juego para ralentizar el juego durante 5 segundos, con 15
+    de cooldown. Se usa para esquivar balas"
 --- !u!222 &82230067
 CanvasRenderer:
   m_ObjectHideFlags: 0

@@ -59,8 +59,11 @@ public class PlayerAttack : MonoBehaviour
 
     public void AsignAttack(AttackContainer other)
     {
-        attack = other;
-        hud.UpdateWeapon(attack.getAmmo(), attack.Max_Ammo, attack.Descripcion, attack.img, attack.UsesAmmo);
+        if (CanPickupWeapons) 
+        { 
+            attack = other;
+            hud.UpdateWeapon(attack.getAmmo(), attack.Max_Ammo, attack.Descripcion, attack.img, attack.UsesAmmo);
+        }
     }
 
     public void UpdateHUD()
