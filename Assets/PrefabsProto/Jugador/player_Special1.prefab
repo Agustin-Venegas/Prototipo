@@ -123,7 +123,7 @@ MonoBehaviour:
   attack: {fileID: 0}
   DefaultAttack: {fileID: 2574906691886949617}
   special: {fileID: 1327158137557482564}
-  hud: {fileID: 0}
+  hud: {fileID: 405256644408192407}
   CanPickupWeapons: 0
   ActivateSpecialOnShoot: 0
 --- !u!114 &2661754966858521962

@@ -7,10 +7,13 @@ public class EnemyObject : MonoBehaviour, IHurtable
     [Header("Vars")]
     public int maxHp = 20; //Hit Points Máximos.
     int hp;    //Hit Points
+    public float AttackCooldown = 0f;
+    float attack_timer = 0;
 
     [Header("Partes")]
     public AttackContainer attack;
     public Condicion cond;
+    public GameObject Drop;
 
     GameObject Target;
     bool alarmed = false;
@@ -29,7 +32,16 @@ public class EnemyObject : MonoBehaviour, IHurtable
         {
             RotateTowardsTarget();
 
-            if (attack.CanShoot()) attack.Shoot();
+            if (attack.CanShoot())
+            {
+                attack_timer += Time.deltaTime;
+
+                if (attack_timer >= AttackCooldown) 
+                {
+                    attack_timer = 0;
+                    attack.Shoot();
+                }
+            }
         }
     }
 
@@ -78,7 +90,8 @@ public class EnemyObject : MonoBehaviour, IHurtable
     public void Die()
     {
         enabled = false;
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false);
+        Drop.SetActive(true);
         cond.completada = true;
         MisionManager.Instance.CheckComplete();
     }

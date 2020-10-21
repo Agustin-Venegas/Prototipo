@@ -20,7 +20,7 @@ public class PlayerMovements : MonoBehaviour
     KeyCode dash;
 
     /***********/
-    public Rigidbody2D rg2d;   //Cuerpo Rígido utilizado para acceder a la velocidad.
+    Rigidbody2D rg2d;   //Cuerpo Rígido utilizado para acceder a la velocidad.
 
     private float movementX = 0;    //Movimiento en el eje X: -1 si se mueve a las izquierda, 1 si se mueve a la derecha, 0 si no se mueve. 
     private float movementY = 0;    //Movimiento en el eje Y: -1 si se mueve a las izquierda, 1 si se mueve a la derecha, 0 si no se mueve.
@@ -159,13 +159,6 @@ public class PlayerMovements : MonoBehaviour
             dashState = false;  //dashState se desactiva.
             impulsed = false;   //impulsed se desactiva.
         }
-
-        Debug.Log(rg2d.velocity);   //Imprime por consola el valor de la velocidad.
-
-
-        /***************************/
-
-        //rg2d.MovePosition(rg2d.position + (movementX + movementY) * speed * Time.fixedDeltaTime);
 
         Vector2 lookDir = mousePos - rg2d.position;
         float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg - 90f; //arctangente de (y,x)

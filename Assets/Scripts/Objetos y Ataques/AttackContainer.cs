@@ -63,6 +63,7 @@ public class AttackContainer : MonoBehaviour
         else
         {
             Instantiate(bulletPrefab, transform.position + (transform.up), transform.rotation);
+            if (UsesAmmo) ammo--;
         }
 
         timer = Cooldown;
@@ -80,6 +81,7 @@ public class AttackContainer : MonoBehaviour
         else
         {
             Instantiate(bulletPrefab, firePoint.position + (firePoint.up), firePoint.rotation);
+            if (UsesAmmo) ammo--;
         }
 
         timer = Cooldown;

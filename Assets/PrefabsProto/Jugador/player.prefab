@@ -120,9 +120,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firePoint: {fileID: 4646273243384345492}
   attack: {fileID: 0}
-  DefaultAttack: {fileID: 0}
+  DefaultAttack: {fileID: 7628964188070734599}
   special: {fileID: 0}
-  hud: {fileID: 0}
+  hud: {fileID: 8004895350230206608}
   CanPickupWeapons: 1
   ActivateSpecialOnShoot: 0
 --- !u!114 &7968017237664109212
@@ -204,7 +204,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e44ab87965cd0f4d7b4278c2014af55b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 1153519473551830265, guid: 4486996bb71b1d26e833539201e154a7,
+  bulletPrefab: {fileID: 2590959631077585886, guid: 777c47a7b2b5fc8a0b4b5a3137f06097,
     type: 3}
   IsMelee: 1
   Cooldown: 0.3
