@@ -125,6 +125,7 @@ public class EnemyObject : MonoBehaviour, IHurtable
         if (coll.gameObject.GetComponent<PlayerObject>() != null && state == IAState.Ataque)
         {
             PasarPersecucion();
+            nav.destination = coll.transform.position;
         }
     }
 
