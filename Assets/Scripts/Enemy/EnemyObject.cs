@@ -100,7 +100,7 @@ public class EnemyObject : MonoBehaviour, IHurtable
 
     public bool Hurt(int d)
     {
-        if (IsAlive) 
+        if (IsAlive()) 
         { 
             hp -= d;
 
