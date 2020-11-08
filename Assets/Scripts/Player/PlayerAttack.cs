@@ -76,6 +76,6 @@ public class PlayerAttack : MonoBehaviour
 
     public void LanzarArma()
     {
-
+        attack = null;
     }
 }
