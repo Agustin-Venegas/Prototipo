@@ -22,6 +22,9 @@ public class PlayerObject : MonoBehaviour, IHurtable
     public GameObject Pause;
     public GameObject Death;
 
+    [Header("Otros")]
+    public AudioSource ouch;
+
     bool paused = false;
 
     void Start()
@@ -53,6 +56,9 @@ public class PlayerObject : MonoBehaviour, IHurtable
 
     public bool Hurt(int d)
     {
+
+        ouch.Play();
+
         hp -= d;
 
         hud.UpdateHealth(hp, HP_Max);

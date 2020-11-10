@@ -22,6 +22,8 @@ public class AttackContainer : MonoBehaviour
     public string Descripcion;
 
     [Header("Al Disparar")]
+    public bool Alertar;
+    public float RadioAlertar = 5;
     public UnityEvent OnShoot;
 
     int ammo = 0;
@@ -68,6 +70,8 @@ public class AttackContainer : MonoBehaviour
 
         timer = Cooldown;
 
+        if (Alertar) Alert(transform.position, RadioAlertar);
+
         OnShoot.Invoke();
     }
 
@@ -86,6 +90,14 @@ public class AttackContainer : MonoBehaviour
 
         timer = Cooldown;
 
+        if (Alertar) Alert(firePoint.position, RadioAlertar);
+
         OnShoot.Invoke();
+    }
+
+
+    public void Alert(Vector3 v, float r) //alertar enemigos del nivel
+    {
+        if (EnemyManager.Instance != null) EnemyManager.Instance.Alertar(v, r);
     }
 }

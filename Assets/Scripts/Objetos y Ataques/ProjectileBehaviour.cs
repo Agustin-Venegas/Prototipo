@@ -22,6 +22,9 @@ public class ProjectileBehaviour : MonoBehaviour
     public bool DieOnImpact = false;
     public float Time_Alive = 1f; //tiempo vivo
 
+    public int ExtraDamage = 0;
+
+
     float timer = 0;
 
     [Header("Al Impactar")]
@@ -51,7 +54,7 @@ public class ProjectileBehaviour : MonoBehaviour
 
         if (hurt != null && coll.isTrigger == false)
         {
-            hurt.Hurt(Damage);
+            hurt.Hurt(Damage + Random.Range(0, ExtraDamage+1));
             OnHit.Invoke();
 
             if (DieOnImpact) Destroy(gameObject);

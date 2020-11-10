@@ -100,7 +100,7 @@ public class EnemyObject : MonoBehaviour, IHurtable
 
     public void PasarSospechar(Vector3 v)
     {
-        timer = 0.5f;
+        timer = 0.1f;
 
         state = IAState.Sospecha;
 

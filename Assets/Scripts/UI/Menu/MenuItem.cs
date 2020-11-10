@@ -1,9 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
-public abstract class MenuItem : MonoBehaviour
+public class MenuItem : MonoBehaviour
 {
+
+    public UnityEvent OnHover;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -11,7 +15,18 @@ public abstract class MenuItem : MonoBehaviour
     }
 
     // Update is called once per frame
-    public abstract void Update();
+    void Update()
+    {
 
-    public abstract void Do();
+    }
+
+    public virtual void Do()
+    {
+
+    }
+
+    void OnMouseEnter()
+    {
+        OnHover.Invoke();
+    }
 }

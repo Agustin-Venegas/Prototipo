@@ -1,23 +1,29 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using IMPro;
+using TMPro;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class Dialog : MonoBehaviour
 {
 
-    public TextMeshProGUI disp;
+    public TextMeshProUGUI disp;
+    public Image head;
     public string[] Sentences;  //frases
     public Sprite[] TalkingHeads; //imagen q aparece, puede ser null
-    public float CharSpeed = 0.2f;
+    public float CharSpeed = 0.025f;
 
-    public GameObject Boton;
-        
-    int index;
+    public GameObject Boton; //boton k avanza el dialogo
+
+    public UnityEvent OnFinish;
+
+    int index = 0;
 
     IEnumerator Type()
     {
+        head.sprite = TalkingHeads[index];
+
         foreach (char c in Sentences[index].ToCharArray())
         {
             disp.text += c;
@@ -29,6 +35,8 @@ public class Dialog : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Boton.SetActive(false);
+
         StartCoroutine(Type());
     }
 
@@ -55,6 +63,7 @@ public class Dialog : MonoBehaviour
         {
             disp.text = "";
             Boton.SetActive(false);
+            OnFinish.Invoke();
         }
     }
 }
