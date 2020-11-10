@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-enum IAState
+public enum IAState //estados ia
 {
     Idle, //no esta persiguiendo
     Sospecha, //vio un cadaver o algo
@@ -15,7 +15,7 @@ public class EnemyObject : MonoBehaviour, IHurtable
 {
     [Header("Vars")]
     public int maxHp = 20; //Hit Points Máximos.
-    int hp;    //Hit Points actuales
+    int hp; //Hit Points actuales
     public float AttackCooldown = 0f; //delay extra para el ataque
     float attack_timer = 0;
 
@@ -26,8 +26,8 @@ public class EnemyObject : MonoBehaviour, IHurtable
     public GameObject Drop; //arma q dropea
 
     [Header("Var IA")]
-    GameObject Target; //cosa que llama la atencion
-    IAState state; //como esta
+    Transform Target; //cosa que llama la atencion
+    public IAState state; //como esta
     float timer; //temporizador de no realziar acciones, stun, etc
     NavMeshAgent nav; //la cosa de IA best comentario ever
 
@@ -98,6 +98,15 @@ public class EnemyObject : MonoBehaviour, IHurtable
         nav.destination = other.transform.position;
     }
 
+    public void PasarSospechar(Vector3 v)
+    {
+        timer = 0.5f;
+
+        state = IAState.Sospecha;
+
+        nav.destination = v;
+    }
+
     public bool Hurt(int d)
     {
         if (IsAlive()) 
@@ -105,6 +114,11 @@ public class EnemyObject : MonoBehaviour, IHurtable
             hp -= d;
 
             timer = 0.3f;
+
+            if (state != IAState.Ataque) //se alerta
+            {
+                PasarSospechar(PlayerObject.Instance.gameObject.transform.position);
+            }
 
             if (!IsAlive())
             {
@@ -146,7 +160,7 @@ public class EnemyObject : MonoBehaviour, IHurtable
 
             if (hit == false)
             {
-                Target = coll.gameObject; //objetivo
+                Target = coll.gameObject.transform; //objetivo
 
                 if (state != IAState.Ataque)
                 {
@@ -187,12 +201,15 @@ public class EnemyObject : MonoBehaviour, IHurtable
     {
         enabled = false; //desactiva el enemigo
 
+        nav.enabled = false; //desactiva el perseguidor
+        rb.simulated = false;
+
         //gameObject.SetActive(false);
         Drop.SetActive(true);
         Drop.transform.parent = null;
 
         if (cond != null) cond.completada = true; //completa un objetivo
-        MisionManager.Instance.CheckComplete(); //actualizamos la mision del nivel
+        if (MisionManager.Instance != null) MisionManager.Instance.CheckComplete(); //actualizamos la mision del nivel
     }
 
     void PasarAtaque()
@@ -211,12 +228,12 @@ public class EnemyObject : MonoBehaviour, IHurtable
     public void Ataque() //cosa para atacar
     {
 
-        Vector3 dif = Target.transform.position - transform.position;
+        Vector3 dif = Target.position - transform.position;
         //float angle = Vector2.SignedAngle(Target.transform.position, transform.position);
 
         float angle = (Mathf.Atan2(dif.y, dif.x) - Mathf.PI / 2) * Mathf.Rad2Deg;
 
-        float dr = 120 * Time.deltaTime;
+        float dr = 180 * Time.deltaTime;
         float new_angle = Mathf.MoveTowardsAngle(transform.eulerAngles.z, angle, dr);
 
         transform.eulerAngles = new Vector3(0, 0, new_angle);
@@ -224,7 +241,7 @@ public class EnemyObject : MonoBehaviour, IHurtable
 
         if (attack.IsMelee)
         {
-
+            //aqui debe tirarse hacia el jugador
         }
 
         if (attack.CanShoot())
@@ -237,5 +254,18 @@ public class EnemyObject : MonoBehaviour, IHurtable
                 attack.Shoot();
             }
         }
+    }
+
+    public void RotarHacia(Vector3 v)
+    {
+        Vector3 dif = v - transform.position;
+        //float angle = Vector2.SignedAngle(Target.transform.position, transform.position);
+
+        float angle = (Mathf.Atan2(dif.y, dif.x) - Mathf.PI / 2) * Mathf.Rad2Deg;
+
+        float dr = 180 * Time.deltaTime;
+        float new_angle = Mathf.MoveTowardsAngle(transform.eulerAngles.z, angle, dr);
+
+        transform.eulerAngles = new Vector3(0, 0, new_angle);
     }
 }
