@@ -35,9 +35,6 @@ public class Dialog : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Boton.SetActive(false);
-
-        StartCoroutine(Type());
     }
 
     // Update is called once per frame
@@ -47,6 +44,14 @@ public class Dialog : MonoBehaviour
         {
             Boton.SetActive(true);
         }
+    }
+
+    void OnEnable()
+    {
+
+        Boton.SetActive(false);
+
+        StartCoroutine(Type());
     }
 
     public void Avanzar()
@@ -64,6 +69,7 @@ public class Dialog : MonoBehaviour
             disp.text = "";
             Boton.SetActive(false);
             OnFinish.Invoke();
+            index = 0;
         }
     }
 }
