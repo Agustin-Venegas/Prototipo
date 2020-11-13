@@ -13,6 +13,7 @@ public enum IAState //estados ia
 
 public class EnemyObject : MonoBehaviour, IHurtable
 {
+    public Animator animator;
     [Header("Vars")]
     public int maxHp = 20; //Hit Points Máximos.
     int hp; //Hit Points actuales
@@ -30,6 +31,7 @@ public class EnemyObject : MonoBehaviour, IHurtable
     public IAState state; //como esta
     float timer; //temporizador de no realziar acciones, stun, etc
     NavMeshAgent nav; //la cosa de IA best comentario ever
+
 
     // Start is called before the first frame update
     void Start()
@@ -80,6 +82,7 @@ public class EnemyObject : MonoBehaviour, IHurtable
 
                 case IAState.Ataque:
                     Ataque();
+                    animator.SetBool("Shoot", true);
                     break;
             }
         }
@@ -200,7 +203,7 @@ public class EnemyObject : MonoBehaviour, IHurtable
     public void Die()
     {
         enabled = false; //desactiva el enemigo
-
+        animator.SetBool("Dead", true);
         nav.enabled = false; //desactiva el perseguidor
         rb.simulated = false;
 
