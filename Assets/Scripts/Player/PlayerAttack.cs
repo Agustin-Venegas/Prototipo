@@ -7,6 +7,9 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
+    public Animator animator;
+    bool isShooting = false;
+
     [Header("Partes")]
     public Transform firePoint;
     public AttackContainer attack;
@@ -28,22 +31,31 @@ public class PlayerAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetButtonDown("Fire1"))
+        
+        if (Input.GetButtonDown("Fire1"))
         {
+            
             if (attack != null)
             {
+                
                 if (attack.CanShoot()) attack.Shoot(firePoint);
                 if (ActivateSpecialOnShoot) special.Activate();
             }
             else
             {
+                animator.SetBool("Shoot", true);
+                isShooting = true;
                 if (DefaultAttack.CanShoot()) DefaultAttack.Shoot();
                 if (ActivateSpecialOnShoot) special.Activate();
             }
 
             UpdateHUD();
         }
-
+        if (isShooting == true)
+        {
+            animator.SetBool("Shoot", false);
+            isShooting = false;
+        }
         if (Input.GetButtonDown("Fire2"))
         {
             if (CanPickupWeapons && attack != null)
@@ -55,6 +67,7 @@ public class PlayerAttack : MonoBehaviour
                 if (special != null) special.Activate();
             }
         }
+        
     }
 
     public void AsignAttack(AttackContainer other)
