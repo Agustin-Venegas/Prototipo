@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.Events;
 /*
  * Este script debe ponerse en aquellos objetos
  * que sean ataques melee cuerpo a cuerpo
@@ -23,6 +23,9 @@ public class MeleeBehaviour : MonoBehaviour
     public float Timer = 0.3f; //tiempo segundo
     public int Damage = 5;
     public bool DespawnsOnHit = true;
+
+    [Header("Al Golpear")]
+    public UnityEvent OnHitEnemy;
 
     private float dAngle;
     private float timer;
@@ -46,13 +49,18 @@ public class MeleeBehaviour : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter2D(Collider2D coll)
+    public void OnTriggerEnter2D(Collider2D coll)
     {
         IHurtable hurt = coll.gameObject.GetComponent<IHurtable>() as IHurtable;
 
         if (hurt != null && coll.isTrigger == false)
         {
             hurt.Hurt(Damage);
+
+            if (hurt is EnemyObject)
+            {
+                OnHitEnemy.Invoke();
+            }
 
             if (DespawnsOnHit) Destroy(this.gameObject);
         }
