@@ -17,15 +17,14 @@ public class Game : MonoBehaviour
     [Header("Vars")]
     public int active_index;
 
-    [Header("SaveData")]public int Desbloqueos;
+    [Header("SaveData")]
+    public int Desbloqueos = 1;
     public List<float> TiempoNivel = new List<float>(); //almacena los tiempos de cada nivel
+    public string lastScene = null; //checkpoints
 
-
-    GameSave save1;
-    GameSave save2;
-    GameSave save3;
-
-
+    public GameSave save1;
+    public GameSave save2;
+    public GameSave save3;
 
     // Start is called before the first frame update
     void Start()
@@ -52,6 +51,7 @@ public class Game : MonoBehaviour
     {
         ActiveSave.Desbloqueos = Desbloqueos;
         ActiveSave.TiempoNivel = ActiveSave.TiempoNivel;
+        SaveIntoJason("save"+active_index);
     }
 
     public void LoadActive()
@@ -83,5 +83,26 @@ public class Game : MonoBehaviour
         save = JsonUtility.FromJson<GameSave>(data);
 
         return save; //funciona bien
+    }
+
+    public void SelectActive(int i)
+    {
+
+        active_index = i;
+
+        switch (i)
+        {
+            case 1:
+                ActiveSave = save1;
+                break;
+
+            case 2:
+                ActiveSave = save2;
+                break;
+
+            case 3:
+                ActiveSave = save3;
+                break;
+        }
     }
 }
