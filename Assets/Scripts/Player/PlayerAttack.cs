@@ -7,8 +7,9 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
-    public Animator animator;
-    bool isShooting = false;
+    public bool isShooting = false;
+    public bool WithGun = false;
+    public bool isHitting = false;
 
     [Header("Partes")]
     public Transform firePoint;
@@ -23,6 +24,12 @@ public class PlayerAttack : MonoBehaviour
 
     public static PlayerAttack Instance;
 
+    public Animator animator;
+
+    public float timerGolpe = 0.0f;
+    public float timerShoot = 0.0f;
+    public float Cooldown = 0.5f;
+
     void Start()
     {
         Instance = this;
@@ -31,35 +38,54 @@ public class PlayerAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (timerGolpe > 0) timerGolpe -= Time.deltaTime;
+        if (timerShoot > 0) timerShoot -= Time.deltaTime;
+
         if (Input.GetButtonDown("Fire1"))
         {
             
             if (attack != null)
             {
+                if (attack.CanShoot())   
+                {
+                    attack.Shoot(firePoint);
+                    isShooting = true;
+                    timerShoot = Cooldown;
+                }
                 
-                if (attack.CanShoot()) attack.Shoot(firePoint);
                 if (ActivateSpecialOnShoot) special.Activate();
             }
             else
             {
-                animator.SetBool("Shoot", true);
-                isShooting = true;
-                if (DefaultAttack.CanShoot()) DefaultAttack.Shoot();
+                if (DefaultAttack.CanShoot())
+                {
+                    DefaultAttack.Shoot();
+                    if (!WithGun)
+                    {
+                        isHitting = true;
+                        timerGolpe = Cooldown;
+                    }
+                    
+                }
                 if (ActivateSpecialOnShoot) special.Activate();
             }
-
             UpdateHUD();
         }
-        if (isShooting == true)
+
+        if (timerGolpe < 0)
         {
-            animator.SetBool("Shoot", false);
+            isHitting = false;
+        }
+        if (timerShoot < 0)
+        {
             isShooting = false;
         }
+
         if (Input.GetButtonDown("Fire2"))
         {
             if (CanPickupWeapons && attack != null)
             {
+                
                 LanzarArma();
             }
             else
@@ -73,9 +99,10 @@ public class PlayerAttack : MonoBehaviour
     public void AsignAttack(AttackContainer other)
     {
         if (CanPickupWeapons) 
-        { 
+        {
             attack = other;
             hud.UpdateWeapon(attack.getAmmo(), attack.Max_Ammo, attack.Descripcion, attack.img, attack.UsesAmmo);
+            WithGun = true;
         }
     }
 
@@ -91,5 +118,6 @@ public class PlayerAttack : MonoBehaviour
     {
         hud.UpdateWeapon(0, attack.Max_Ammo, attack.Descripcion, attack.img, attack.UsesAmmo);
         attack = null;
+        WithGun = false;
     }
 }
