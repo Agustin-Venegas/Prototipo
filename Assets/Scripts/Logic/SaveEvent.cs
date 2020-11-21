@@ -21,6 +21,6 @@ public class SaveEvent : MonoBehaviour
 
     public void SaveTheGame()
     {
-
+		Game.Instance.SaveToActive();
     }
 }

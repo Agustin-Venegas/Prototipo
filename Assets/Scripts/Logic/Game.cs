@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 //esta cosa debe ser un objeto q no se destruye
@@ -50,7 +51,20 @@ public class Game : MonoBehaviour
     public void SaveToActive()
     {
         ActiveSave.Desbloqueos = Desbloqueos;
-        ActiveSave.TiempoNivel = ActiveSave.TiempoNivel;
+        ActiveSave.TiempoNivel = TiempoNivel;
+		lastScene = SceneManager.GetActiveScene().name;
+		ActiveSave.lastScene = lastScene;
+		
+        SaveIntoJason("save"+active_index);
+    }
+	
+	public void SaveToActive(string s)
+    {
+        ActiveSave.Desbloqueos = Desbloqueos;
+        ActiveSave.TiempoNivel = TiempoNivel;
+		lastScene = s;
+		ActiveSave.lastScene = lastScene;
+		
         SaveIntoJason("save"+active_index);
     }
 
@@ -58,6 +72,7 @@ public class Game : MonoBehaviour
     {
         Desbloqueos = ActiveSave.Desbloqueos;
         TiempoNivel = ActiveSave.TiempoNivel;
+		lastScene = ActiveSave.lastScene;
     }
 
     public bool SaveIntoJason(string filename)
