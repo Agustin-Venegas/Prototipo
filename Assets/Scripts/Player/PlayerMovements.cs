@@ -45,9 +45,9 @@ public class PlayerMovements : MonoBehaviour
 
     public Animator animator;
 
+    public bool isWalking;
 
     public static PlayerMovements Instance;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -70,48 +70,45 @@ public class PlayerMovements : MonoBehaviour
         {
             cam = Camera.main;
         }
+
+        isWalking = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-
         if (!impulsed)  //Si impulsed está desactivado.
         {
-            bool isWalking = false;
+            
             if (Input.GetKey(right))    //Si pulsa Derecha.
             {
                 rg2d.velocity += Vector2.right * speed * Time.deltaTime;    //Aumenta la velocidad hacia la derecha.
                 movementX = 1;
-                animator.SetBool("Speed", true);
-                isWalking = true;
             }
             if (Input.GetKey(left))     //Si pulsa Izquierda.
             {
                 rg2d.velocity += Vector2.left * speed * Time.deltaTime;     //Aumenta la velocidad hacia la izquierda.
-                animator.SetBool("Speed", true);
                 movementX = -1;
-                isWalking = true;
             }
 
             if (Input.GetKey(up))   //Si pulsa Arriba.
             {
                 rg2d.velocity += Vector2.up * speed * Time.deltaTime;       //Aumenta la velocidad hacia arriba.
-                animator.SetBool("Speed", true);
                 movementY = 1;
-                isWalking = true;
             }
             else if (Input.GetKey(down))    //Si pulsa Abajo.
             {
                 rg2d.velocity += Vector2.down * speed * Time.deltaTime;     //Aumenta la velocidad hacia abajo.
-                animator.SetBool("Speed", true);
                 movementY = -1;
-                isWalking = true;
             }
 
-            if (!isWalking)
+            if (movementX != 0 || movementY!= 0)
             {
-                animator.SetBool("Speed", false);
+                isWalking = true;
+            }
+            else
+            {
+                isWalking = false;
             }
 
             if (!dashState) //Si dashState está desactivado.
@@ -121,9 +118,9 @@ public class PlayerMovements : MonoBehaviour
                     dashState = true;   //dashState se ativa.
                 }
             }
-
+            
         }
-
+        
         /***************************/
         movementVec.x = Input.GetAxisRaw("Horizontal");
         movementVec.y = Input.GetAxisRaw("Vertical");
