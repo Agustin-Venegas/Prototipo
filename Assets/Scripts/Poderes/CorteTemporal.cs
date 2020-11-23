@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 //esta habilidad hace que el tiempo se ralentize, por 5 segundos
@@ -19,6 +20,9 @@ public class CorteTemporal : MonoBehaviour, HabilidadConCooldown
     // Start is called before the first frame update
     void Start()
     {
+
+        SceneManager.sceneUnloaded += OnSceneUnloaded; //nos seguramos q no se rompa
+
         if (CorteTemporal.Instance != null)
         {
             Destroy(gameObject);
@@ -30,6 +34,11 @@ public class CorteTemporal : MonoBehaviour, HabilidadConCooldown
 
         Time.timeScale = SpeedRatioToWorld;
         PlayerMovements.Instance.maxSpeed *= SpeedRatioToPlayer;
+    }
+
+    private void OnSceneUnloaded(Scene actual)
+    {
+        Time.timeScale = 1.0f; //nos aseguramos de no romper nada
     }
 
     // Update is called once per frame

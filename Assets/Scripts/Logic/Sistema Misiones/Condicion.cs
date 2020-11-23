@@ -7,6 +7,11 @@ public class Condicion : MonoBehaviour
 
     public bool completada = false;
 
+    public void Completar()
+    {
+        completada = true;
+    }
+
     void Start()
     {
         

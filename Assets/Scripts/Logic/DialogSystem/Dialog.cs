@@ -17,6 +17,7 @@ public class Dialog : MonoBehaviour
     public GameObject Boton; //boton k avanza el dialogo
 
     public UnityEvent OnFinish;
+    public UnityEvent OnStart;
 
     int index = 0;
 
@@ -35,6 +36,7 @@ public class Dialog : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        OnStart.Invoke();
     }
 
     // Update is called once per frame
