@@ -45,6 +45,8 @@ public class MisionManager : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D coll)
     {
+		CheckComplete();
+		
         if (coll.gameObject.GetComponent<PlayerObject>() != null)
         {
             if (accomplished)
