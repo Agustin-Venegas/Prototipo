@@ -86,7 +86,7 @@ public class Game : MonoBehaviour
     public GameSave LoadFromJason(string filename)
     {
         string data;
-        GameSave save;
+        GameSave save = null;
         try
         { 
             data = System.IO.File.ReadAllText(Application.persistentDataPath + "/" + filename + ".json");

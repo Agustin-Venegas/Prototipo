@@ -22,6 +22,7 @@ public class MeleeBehaviour : MonoBehaviour
     public float Angle = 115.0f; //angulo en deg
     public float Timer = 0.3f; //tiempo segundo
     public int Damage = 5;
+    public int ExtraDamage = 0;
     public bool DespawnsOnHit = true;
 
     [Header("Al Golpear")]
@@ -55,7 +56,7 @@ public class MeleeBehaviour : MonoBehaviour
 
         if (hurt != null && coll.isTrigger == false)
         {
-            hurt.Hurt(Damage);
+            hurt.Hurt(Damage + Random.Range(0, ExtraDamage + 1));
 
             if (hurt is EnemyObject)
             {

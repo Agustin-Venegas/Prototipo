@@ -19,7 +19,7 @@ public class LoadUI : MonoBehaviour
 
     void Start()
     {
-        if (Game.Instance.save1 != null)
+        if (Game.Instance.save1 != null && Game.Instance.save1.lastScene != "")
         {
             info1.text = Game.Instance.save1.CrearJason();
         }
@@ -29,7 +29,7 @@ public class LoadUI : MonoBehaviour
             info1.text = "NO SAVE DATA";
         }
 
-        if (Game.Instance.save2 != null)
+        if (Game.Instance.save2 != null && Game.Instance.save2.lastScene != "")
         {
             info2.text = Game.Instance.save2.CrearJason();
         }
@@ -39,7 +39,7 @@ public class LoadUI : MonoBehaviour
             Boton2.enabled = false;
         }
 
-        if (Game.Instance.save3 != null)
+        if (Game.Instance.save3 != null && Game.Instance.save3.lastScene != "")
         {
             info3.text = Game.Instance.save3.CrearJason();
         }

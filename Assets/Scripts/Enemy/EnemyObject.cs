@@ -74,10 +74,11 @@ public class EnemyObject : MonoBehaviour, IHurtable
                     break;
 
                 case IAState.Sospecha:
-
+                    RotarHacia(nav.steeringTarget);
                     break;
 
                 case IAState.Perseguir:
+                    RotarHacia(nav.steeringTarget);
                     break;
 
                 case IAState.Ataque:
@@ -207,6 +208,9 @@ public class EnemyObject : MonoBehaviour, IHurtable
         nav.enabled = false; //desactiva el perseguidor
         rb.simulated = false;
 
+        GetComponent<SpriteRenderer>().sortingOrder = -1;
+
+
         //gameObject.SetActive(false);
         Drop.SetActive(true);
         Drop.transform.parent = null;
@@ -262,7 +266,6 @@ public class EnemyObject : MonoBehaviour, IHurtable
     public void RotarHacia(Vector3 v)
     {
         Vector3 dif = v - transform.position;
-        //float angle = Vector2.SignedAngle(Target.transform.position, transform.position);
 
         float angle = (Mathf.Atan2(dif.y, dif.x) - Mathf.PI / 2) * Mathf.Rad2Deg;
 
