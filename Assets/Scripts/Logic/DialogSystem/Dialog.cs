@@ -20,6 +20,10 @@ public class Dialog : MonoBehaviour
     public UnityEvent OnStart;
 
     int index = 0;
+    bool stopped = false;
+
+
+    Coroutine run;
 
     IEnumerator Type()
     {
@@ -27,7 +31,7 @@ public class Dialog : MonoBehaviour
 
         foreach (char c in Sentences[index].ToCharArray())
         {
-            disp.text += c;
+            if (!stopped) disp.text += c;
             yield return new WaitForSeconds(CharSpeed);
         }
     }
@@ -42,36 +46,37 @@ public class Dialog : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (disp.text == Sentences[index])
-        {
-            Boton.SetActive(true);
-        }
     }
 
     void OnEnable()
-    {
-
-        Boton.SetActive(false);
-
-        StartCoroutine(Type());
+    { 
+        run = StartCoroutine(Type());
     }
 
     public void Avanzar()
     {
-        Boton.SetActive(false);
-
-        if (index < Sentences.Length -1)
+        if (disp.text == Sentences[index])
         {
-            index++;
-            disp.text = "";
-            StartCoroutine(Type());
+            if (index < Sentences.Length - 1)
+            {
+                stopped = false;
+                index++;
+                disp.text = "";
+                run = StartCoroutine(Type());
+            }
+            else
+            {
+                disp.text = "";
+                Boton.SetActive(false);
+                OnFinish.Invoke();
+                index = 0;
+            }
         }
         else
         {
-            disp.text = "";
-            Boton.SetActive(false);
-            OnFinish.Invoke();
-            index = 0;
+            StopCoroutine(run);
+            stopped = true;
+            disp.text = Sentences[index];
         }
     }
 }

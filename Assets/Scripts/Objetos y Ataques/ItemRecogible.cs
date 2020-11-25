@@ -9,6 +9,10 @@ public class ItemRecogible : MonoBehaviour
     public AttackContainer itemDado;
     bool touched = false;
 
+    [Header("Partes")]
+    public SpriteRenderer sprit;
+    public Collider2D col;
+
     void Start()
     {
         
@@ -23,7 +27,9 @@ public class ItemRecogible : MonoBehaviour
                 if (PlayerAttack.Instance.CanPickupWeapons) 
                 {  
                     PlayerAttack.Instance.AsignAttack(itemDado);
-                    Destroy(gameObject);
+
+                    //Destroy(gameObject);
+                    Activar(false);
                 }
             }
     }
@@ -36,6 +42,13 @@ public class ItemRecogible : MonoBehaviour
         }
     }
 
+    public void Activar(bool r)
+    {
+        enabled = r;
+        sprit.enabled = r;
+        col.enabled = r;
+    }
+
     void OnTriggerExit2D(Collider2D coll)
     {
         if (coll.gameObject.GetComponent<PlayerObject>() != null)
@@ -43,7 +56,6 @@ public class ItemRecogible : MonoBehaviour
             touched = false;
         }
     }
-
 
     public void AsignarObjeto(InventoryItem i)
     {
