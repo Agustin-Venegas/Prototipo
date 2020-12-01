@@ -212,7 +212,8 @@ public class EnemyObject : MonoBehaviour, IHurtable
 
 
         //gameObject.SetActive(false);
-        Drop.SetActive(true);
+        Drop.GetComponent<ItemRecogible>().enabled = true;
+        Drop.GetComponent<ItemRecogible>().Activar(true);
         Drop.transform.parent = null;
 
         if (cond != null) cond.completada = true; //completa un objetivo
@@ -258,7 +259,7 @@ public class EnemyObject : MonoBehaviour, IHurtable
             if (attack_timer >= AttackCooldown)
             {
                 attack_timer = 0;
-                attack.Shoot();
+                attack.Shoot(transform);
             }
         }
     }

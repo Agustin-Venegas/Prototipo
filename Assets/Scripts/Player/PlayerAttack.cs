@@ -117,6 +117,9 @@ public class PlayerAttack : MonoBehaviour
     public void LanzarArma()
     {
         hud.UpdateWeapon(0, attack.Max_Ammo, attack.Descripcion, attack.img, attack.UsesAmmo);
+
+        attack.TeleportObject(transform.position);
+
         attack = null;
         WithGun = false;
     }

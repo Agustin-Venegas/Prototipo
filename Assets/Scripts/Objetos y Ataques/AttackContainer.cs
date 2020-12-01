@@ -96,6 +96,16 @@ public class AttackContainer : MonoBehaviour
     }
 
 
+    public void TeleportObject(Vector3 v)
+    {
+        ItemRecogible c = GetComponent<ItemRecogible>();
+
+        if (c != null) c.Activar(true);
+
+        gameObject.SetActive(true);
+        gameObject.transform.position = v;
+    }
+
     public void Alert(Vector3 v, float r) //alertar enemigos del nivel
     {
         if (EnemyManager.Instance != null) EnemyManager.Instance.Alertar(v, r);
