@@ -38,6 +38,9 @@ public class PlayerMovements : MonoBehaviour
 
     public float dashForce; //Fuerza de impulso.
 
+	
+	float timer = 0;
+
     /**********************/
     public Camera cam = null;
     Vector2 movementVec;
@@ -46,6 +49,8 @@ public class PlayerMovements : MonoBehaviour
     public Animator animator;
 
     public bool isWalking;
+
+	public GameObject HUD_item;
 
     public static PlayerMovements Instance;
     // Start is called before the first frame update
@@ -57,7 +62,7 @@ public class PlayerMovements : MonoBehaviour
         left = KeyCode.A;   //Letra A.
         right = KeyCode.D; //Letra D.
 
-        dash = KeyCode.Q;   //Letra Q.
+        dash = KeyCode.Space;   //Espacio.
         /*****************************/
 
         rg2d = GetComponent<Rigidbody2D>();     //Rigidbody2D del portador del script.
@@ -102,7 +107,7 @@ public class PlayerMovements : MonoBehaviour
                 movementY = -1;
             }
 
-            if (movementX != 0 || movementY!= 0)
+            if (movementX != 0 || movementY != 0)
             {
                 isWalking = true;
             }
@@ -110,14 +115,20 @@ public class PlayerMovements : MonoBehaviour
             {
                 isWalking = false;
             }
-
-            if (!dashState) //Si dashState está desactivado.
-            {
-                if (Input.GetKeyDown(dash)) //Si pulsa Dash
-                {
-                    dashState = true;   //dashState se ativa.
-                }
-            }
+			
+			if (timer > 0) 
+			{
+				timer -= Time.deltaTime;
+			} else 
+			{
+				if (!dashState) //Si dashState está desactivado.
+				{
+					if (Input.GetKeyDown(dash)) //Si pulsa Dash
+					{
+						dashState = true;   //dashState se ativa.
+					}
+				}
+			}
             
         }
         
@@ -127,9 +138,21 @@ public class PlayerMovements : MonoBehaviour
 
         mousePos = cam.ScreenToWorldPoint(Input.mousePosition); //posicion del mouse respecto a la camara 
 
-
-
+		if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            if (HUD_item != null) HUD_item.SetActive(true);
+        }
+		
+        if (Input.GetKeyUp(KeyCode.Tab))
+        {
+            if (HUD_item != null) HUD_item.SetActive(false);
+        }
     }
+	
+	void OnDisable() 
+	{
+		if (HUD_item != null) HUD_item.SetActive(false);
+	}
 
     //Utilizar para manipular físicas y para cálculos físicos.
     private void FixedUpdate()
@@ -141,6 +164,7 @@ public class PlayerMovements : MonoBehaviour
 
             rg2d.velocity = new Vector2(limitedSpeedX, limitedSpeedY);  //Asigna la velocidad límite en ambos ejes X e Y.
         }
+		
         if (impulsed)   //Si impulsed está activado la disminución de velocidad es menor.
         {
             fixedSpeedX = rg2d.velocity.x * 0.8f;   //Calcula la disminución de velocidad en el eje X.

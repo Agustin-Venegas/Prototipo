@@ -49,7 +49,7 @@ public class Dialog : MonoBehaviour
     }
 
     void OnEnable()
-    { 
+    {
         run = StartCoroutine(Type());
     }
 
@@ -67,9 +67,8 @@ public class Dialog : MonoBehaviour
             else
             {
                 disp.text = "";
-                Boton.SetActive(false);
-                OnFinish.Invoke();
                 index = 0;
+				OnFinish.Invoke();
             }
         }
         else

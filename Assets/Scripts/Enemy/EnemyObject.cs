@@ -19,6 +19,7 @@ public class EnemyObject : MonoBehaviour, IHurtable
     int hp; //Hit Points actuales
     public float AttackCooldown = 0f; //delay extra para el ataque
     float attack_timer = 0;
+	public float speed = 3.5f;
 
     [Header("Partes")]
     public AttackContainer attack; //el ataque que usa
@@ -45,6 +46,7 @@ public class EnemyObject : MonoBehaviour, IHurtable
         //esto es porsiacaso el motor trata de rotar el objeto
         nav.updateRotation = false;
         nav.updateUpAxis = false;
+		nav.speed = speed;
     }
 
     // Update is called once per frame
@@ -60,7 +62,7 @@ public class EnemyObject : MonoBehaviour, IHurtable
         else //si no esta estuneado
         {
 
-            nav.speed = 3.5f;
+            nav.speed = speed;
 
             /*crei q tendria q usar esto de switch
              * Hice un juego parecido hace 2 semestres
@@ -250,6 +252,7 @@ public class EnemyObject : MonoBehaviour, IHurtable
         if (attack.IsMelee)
         {
             //aqui debe tirarse hacia el jugador
+			rb.velocity = new Vector2(Mathf.Cos(new_angle), Mathf.Sin(new_angle)) * speed;
         }
 
         if (attack.CanShoot())
