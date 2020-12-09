@@ -126,6 +126,7 @@ public class PlayerMovements : MonoBehaviour
 					if (Input.GetKeyDown(dash)) //Si pulsa Dash
 					{
 						dashState = true;   //dashState se ativa.
+						timer = 2f;
 					}
 				}
 			}
