@@ -24,7 +24,7 @@ public class TriggerEvent : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D coll)
     {
-        if (coll.gameObject.GetComponent<PlayerObject>() != null)
+        if (coll.gameObject.GetComponentInChildren<PlayerObject>() != null)
         {
             OnTrigger.Invoke();
 

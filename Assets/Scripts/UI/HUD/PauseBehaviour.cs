@@ -4,8 +4,16 @@ using UnityEngine;
 
 public class PauseBehaviour : MonoBehaviour
 {
+	void Start()
+	{
+	}
+	
+	void Update() 
+	{
+	}
+	
     public void Return()
     {
-        PlayerObject.Instance.Continue();
+        
     }
 }

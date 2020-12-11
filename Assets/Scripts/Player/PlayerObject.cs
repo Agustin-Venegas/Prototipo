@@ -30,9 +30,12 @@ public class PlayerObject : MonoBehaviour, IHurtable
     void Start()
     {
         hp = HP_Max;
-
-        Instance = this;
     }
+	
+	void Awake() 
+	{
+		Instance = this;
+	}
 
     void Update()
     {

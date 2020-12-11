@@ -11,13 +11,15 @@ public class SelectSkill : MonoBehaviour
     public GameObject[] buttons;
 
     public Transform WhereToSpawn;
+	
+	public CamControl cam;
 
     // Start is called before the first frame update
-    void Start()
+    void OnEnable()
     {
-        for (int i = 0; i< Unlocked; i++)
+        for (int i = 0; i< buttons.Length; i++)	
         {
-            buttons[i].SetActive(true);
+            buttons[i].SetActive( i<= Unlocked);
         }
     }
 
@@ -29,7 +31,8 @@ public class SelectSkill : MonoBehaviour
 
     public void Spawn(int s)
     {
-        Instantiate(prefabs[s], WhereToSpawn);
+        GameObject g = Instantiate(prefabs[s], WhereToSpawn);
+		cam.follow = g.transform;
         Destroy(gameObject);
     }
 }
