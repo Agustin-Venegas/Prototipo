@@ -31,7 +31,7 @@ public class SelectSkill : MonoBehaviour
 
     public void Spawn(int s)
     {
-        GameObject g = Instantiate(prefabs[s], WhereToSpawn);
+        GameObject g = Instantiate(prefabs[s], WhereToSpawn.position, WhereToSpawn.rotation);
 		cam.follow = g.transform;
         Destroy(gameObject);
     }

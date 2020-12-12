@@ -142,7 +142,7 @@ public class EnemyObject : MonoBehaviour, IHurtable
     void OnTriggerExit2D(Collider2D coll) //usamos esto pa cuando el jugador desaparece
     {
         //si estaba atacando y el jugador desaparece
-        if (coll.gameObject.GetComponent<PlayerObject>() != null && state == IAState.Ataque)
+        if (coll.gameObject.GetComponentInChildren<PlayerObject>() != null && state == IAState.Ataque)
         {
             PasarPersecucion();
             nav.destination = coll.transform.position;
@@ -152,10 +152,12 @@ public class EnemyObject : MonoBehaviour, IHurtable
     void OnTriggerStay2D(Collider2D coll) //usamos esto pa ver si el jugador esta siendo visto
     {
         //si el jugador entra al espacio, siempre se alerta
-        if (coll.gameObject.GetComponent<PlayerObject>() != null)
+		PlayerObject g = coll.gameObject.GetComponentInChildren<PlayerObject>();
+		
+        if (g != null)
         {
             //direcion hacia el jugador
-            Vector3 direction = coll.gameObject.transform.position - gameObject.transform.position;
+            Vector3 direction = g.transform.position - gameObject.transform.position;
 
             float len = direction.magnitude;
 
@@ -166,7 +168,7 @@ public class EnemyObject : MonoBehaviour, IHurtable
 
             if (hit == false)
             {
-                Target = coll.gameObject.transform; //objetivo
+                Target = g.transform; //objetivo
 
                 if (state != IAState.Ataque)
                 {
@@ -178,7 +180,7 @@ public class EnemyObject : MonoBehaviour, IHurtable
                 if (state == IAState.Ataque)
                 {
                     PasarPersecucion();
-                    nav.destination = coll.transform.position;
+                    nav.destination = g.transform.position;
                 }
             }
         }
