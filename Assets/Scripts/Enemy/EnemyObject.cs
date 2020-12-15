@@ -33,6 +33,16 @@ public class EnemyObject : MonoBehaviour, IHurtable
     float timer; //temporizador de no realziar acciones, stun, etc
     NavMeshAgent nav; //la cosa de IA best comentario ever
 
+    public bool isShooting = false;
+    public bool WithGun = false;
+    public bool isHitting = false;
+    public bool IsDead = false;
+    public bool isWalking = false;
+
+    public float timerGolpe = 0.0f;
+    public float timerShoot = 0.0f;
+    public float CooldownS = 0.5f;
+
 
     // Start is called before the first frame update
     void Start()
@@ -52,6 +62,8 @@ public class EnemyObject : MonoBehaviour, IHurtable
     // Update is called once per frame
     void Update()
     {
+        if (timerGolpe > 0) timerGolpe -= Time.deltaTime;
+        if (timerShoot > 0) timerShoot -= Time.deltaTime;
 
         if (timer > 0) //si está stuneado o algo
         {
@@ -72,21 +84,36 @@ public class EnemyObject : MonoBehaviour, IHurtable
             switch (state)
             {
                 case IAState.Idle:
-
+                    WithGun = false;
+                    isWalking = false;
                     break;
 
                 case IAState.Sospecha:
                     RotarHacia(nav.steeringTarget);
+                    WithGun = false;
+                    isWalking = true;
                     break;
 
                 case IAState.Perseguir:
                     RotarHacia(nav.steeringTarget);
+                    isWalking = true;
+                    WithGun = false;
                     break;
 
                 case IAState.Ataque:
                     Ataque();
-                    animator.SetBool("Shoot", true);
+                    WithGun = true;
+                    isWalking = false;
                     break;
+            }
+
+            if (timerGolpe < 0)
+            {
+                isHitting = false;
+            }
+            if (timerShoot < 0)
+            {
+                isShooting = false;
             }
         }
     }
@@ -102,6 +129,7 @@ public class EnemyObject : MonoBehaviour, IHurtable
         state = IAState.Sospecha;
 
         nav.destination = other.transform.position;
+
     }
 
     public void PasarSospechar(Vector3 v)
@@ -207,8 +235,8 @@ public class EnemyObject : MonoBehaviour, IHurtable
 
     public void Die()
     {
+        IsDead = true;
         enabled = false; //desactiva el enemigo
-        animator.SetBool("Dead", true);
         nav.enabled = false; //desactiva el perseguidor
         rb.simulated = false;
 
@@ -222,6 +250,8 @@ public class EnemyObject : MonoBehaviour, IHurtable
 
         if (cond != null) cond.completada = true; //completa un objetivo
         if (MisionManager.Instance != null) MisionManager.Instance.CheckComplete(); //actualizamos la mision del nivel
+
+        
     }
 
     void PasarAtaque()
@@ -265,6 +295,8 @@ public class EnemyObject : MonoBehaviour, IHurtable
             {
                 attack_timer = 0;
                 attack.Shoot(transform);
+                isShooting = true;
+                timerShoot = CooldownS;
             }
         }
     }

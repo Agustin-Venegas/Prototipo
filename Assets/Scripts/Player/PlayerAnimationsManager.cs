@@ -17,11 +17,6 @@ public class PlayerAnimationsManager : MonoBehaviour
     const string PLAYER_WALK_PISTOLA = "Walk";
     const string PLAYER_SHOOT_STATIC = "Static_Shoot";
 
-    public bool isShooting = false;
-    public bool WithGun = false;
-    public bool isHitting = false;
-    bool isWalking = false;
-
     PlayerMovements playerMovements;
     PlayerAttack playerAttack;
     // Start is called before the first frame update
@@ -35,11 +30,6 @@ public class PlayerAnimationsManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        /*isWalking = playerMovements.isWalking;
-        isShooting = playerAttack.isShooting;
-        isHitting = playerAttack.isHitting;
-        WithGun = playerAttack.WithGun;*/
-
         if (playerAttack.WithGun)
         {
             if (!playerAttack.isShooting)
@@ -77,8 +67,6 @@ public class PlayerAnimationsManager : MonoBehaviour
                 ChangeAnimationState(PLAYER_PUNCH);
             }
         }
-        
-        
     }
 
     void ChangeAnimationState(string newState)
