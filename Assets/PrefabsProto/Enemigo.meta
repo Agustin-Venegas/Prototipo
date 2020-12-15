@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< Updated upstream:Assets/PrefabsProto/Enemigo.meta
 guid: 364b4bf22d659724597f2e1bf4f1bf2e
+=======
+guid: 02c355becb637b342b00cd9038649465
+>>>>>>> Stashed changes:Assets/Scripts/Thoth.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
