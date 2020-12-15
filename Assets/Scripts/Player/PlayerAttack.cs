@@ -102,7 +102,15 @@ public class PlayerAttack : MonoBehaviour
         {
             attack = other;
             hud.UpdateWeapon(attack.getAmmo(), attack.Max_Ammo, attack.Descripcion, attack.img, attack.UsesAmmo);
-            WithGun = true;
+            
+
+            switch (attack.Descripcion)
+            {
+                case "S & W PDW":
+                    WithGun = true;
+                    break;
+            }
+
         }
     }
 
