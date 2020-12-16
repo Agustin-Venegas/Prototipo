@@ -35,6 +35,8 @@ public class PlayerObject : MonoBehaviour, IHurtable
 	void Awake() 
 	{
 		Instance = this;
+		movement = gameObject.GetComponent<PlayerMovements>();
+		attack = gameObject.GetComponent<PlayerAttack>();
 	}
 
     void Update()

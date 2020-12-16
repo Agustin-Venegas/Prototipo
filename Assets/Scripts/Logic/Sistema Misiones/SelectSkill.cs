@@ -14,6 +14,8 @@ public class SelectSkill : MonoBehaviour
 	
 	public CamControl cam;
 
+	public GameObject HUD_To_Give;
+
     // Start is called before the first frame update
     void OnEnable()
     {
@@ -33,6 +35,13 @@ public class SelectSkill : MonoBehaviour
     {
         GameObject g = Instantiate(prefabs[s], WhereToSpawn.position, WhereToSpawn.rotation);
 		cam.follow = g.transform;
+		
+		if (HUD_To_Give != null) 
+		{
+			PlayerObject po = g.GetComponent<PlayerObject>();
+			po.movement.HUD_item = HUD_To_Give;
+		}
+		
         Destroy(gameObject);
     }
 }
