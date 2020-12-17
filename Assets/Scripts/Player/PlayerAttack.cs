@@ -109,6 +109,9 @@ public class PlayerAttack : MonoBehaviour
                 case "S & W PDW":
                     WithGun = true;
                     break;
+					
+					case "Particle Projection Cannon":
+					break;
             }
 
         }

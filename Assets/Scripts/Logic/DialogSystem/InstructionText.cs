@@ -13,7 +13,7 @@ public class InstructionText : MonoBehaviour
 
     public UnityEvent OnFinish;
 
-    public string instruction;
+    public KeyCode instruction;
 
     public bool finished_on_write = false;
 
@@ -47,7 +47,7 @@ public class InstructionText : MonoBehaviour
         {
             if (finished_on_write) OnFinish.Invoke();
         }
-        if (Input.GetButtonDown(instruction))
+        if (Input.GetKeyDown(instruction))
         {
             OnFinish.Invoke();
         }
