@@ -8,7 +8,7 @@ using UnityEngine;
 public class PlayerAttack : MonoBehaviour
 {
     public bool isShooting = false;
-    public bool WithGun = false;
+    public int WithWeapon = 0;
     public bool isHitting = false;
 
     [Header("Partes")]
@@ -30,9 +30,16 @@ public class PlayerAttack : MonoBehaviour
     public float timerShoot = 0.0f;
     public float Cooldown = 0.5f;
 
+    private SoundManager soundManager;
+
     void Start()
     {
         Instance = this;
+        soundManager = SoundManager.instance;
+        if (soundManager == null)
+        {
+            Debug.LogError("No audio manager founded in the scene");
+        }
     }
 
     // Update is called once per frame
@@ -60,10 +67,11 @@ public class PlayerAttack : MonoBehaviour
                 if (DefaultAttack.CanShoot())
                 {
                     DefaultAttack.Shoot();
-                    if (!WithGun)
+                    if (WithWeapon == 0)
                     {
                         isHitting = true;
                         timerGolpe = Cooldown;
+                        soundManager.PlaySound("Punch1");
                     }
                     
                 }
@@ -106,12 +114,17 @@ public class PlayerAttack : MonoBehaviour
 
             switch (attack.Descripcion)
             {
-                case "S & W PDW":
-                    WithGun = true;
+                case "S & W PDW": //Pisola
+                    WithWeapon = 1;
                     break;
 					
-					case "Particle Projection Cannon":
-					break;
+				case "Particle Projection Cannon": //Rifle de francotirador
+                    WithWeapon = 2;
+                    break;
+
+                case "Bate_de_Beisbol":
+                    WithWeapon = 3;
+                    break;
             }
 
         }
@@ -132,6 +145,6 @@ public class PlayerAttack : MonoBehaviour
         attack.TeleportObject(transform.position);
 
         attack = null;
-        WithGun = false;
+        WithWeapon = 0;
     }
 }

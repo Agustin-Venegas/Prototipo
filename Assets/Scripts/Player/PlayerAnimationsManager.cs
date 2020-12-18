@@ -19,6 +19,9 @@ public class PlayerAnimationsManager : MonoBehaviour
 
     PlayerMovements playerMovements;
     PlayerAttack playerAttack;
+
+    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,43 +33,47 @@ public class PlayerAnimationsManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (playerAttack.WithGun)
+
+        switch (playerAttack.WithWeapon)
         {
-            if (!playerAttack.isShooting)
-            {
-                if (playerMovements.isWalking)
+            case 0:
+                if (!playerAttack.isHitting)
                 {
-                    ChangeAnimationState(PLAYER_WALK_PISTOLA);
+                    if (!playerMovements.isWalking)
+                    {
+                        ChangeAnimationState(PLAYER_IDLE_SIN_ARMAS);
+                    }
+                    else
+                    {
+                        ChangeAnimationState(PLAYER_WALK_SIN_ARMAS);
+                    }
                 }
                 else
                 {
-                    ChangeAnimationState(PLAYER_IDLE_PISTOLA);
+                    ChangeAnimationState(PLAYER_PUNCH);
+                    
                 }
-            }
-            else
-            {
-                ChangeAnimationState(PLAYER_SHOOT_STATIC);
-            }
-            
-        }
-        else
-        {
-            if (!playerAttack.isHitting)
-            {
-                if (!playerMovements.isWalking)
+                break;
+
+            case 1:
+                if (!playerAttack.isShooting)
                 {
-                    ChangeAnimationState(PLAYER_IDLE_SIN_ARMAS);
+                    if (playerMovements.isWalking)
+                    {
+                        ChangeAnimationState(PLAYER_WALK_PISTOLA);
+                    }
+                    else
+                    {
+                        ChangeAnimationState(PLAYER_IDLE_PISTOLA);
+                    }
                 }
                 else
                 {
-                    ChangeAnimationState(PLAYER_WALK_SIN_ARMAS);
+                    ChangeAnimationState(PLAYER_SHOOT_STATIC);
                 }
-            }
-            else
-            {
-                ChangeAnimationState(PLAYER_PUNCH);
-            }
+                break;
         }
+        
     }
 
     void ChangeAnimationState(string newState)
