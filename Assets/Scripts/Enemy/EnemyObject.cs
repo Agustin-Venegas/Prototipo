@@ -45,7 +45,7 @@ public class EnemyObject : MonoBehaviour, IHurtable
 
 
     // Start is called before the first frame update
-    void Start()
+    void OnEnable()
     {
         hp = maxHp; //El hp inicial será igual a la cantidad máxima de hp.
 
@@ -275,7 +275,7 @@ public class EnemyObject : MonoBehaviour, IHurtable
 
         float angle = (Mathf.Atan2(dif.y, dif.x) - Mathf.PI / 2) * Mathf.Rad2Deg;
 
-        float dr = 180 * Time.deltaTime;
+        float dr = nav.angularSpeed * Time.deltaTime;
         float new_angle = Mathf.MoveTowardsAngle(transform.eulerAngles.z, angle, dr);
 
         transform.eulerAngles = new Vector3(0, 0, new_angle);

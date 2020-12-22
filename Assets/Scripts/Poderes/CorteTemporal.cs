@@ -40,6 +40,11 @@ public class CorteTemporal : MonoBehaviour, HabilidadConCooldown
     {
         Time.timeScale = 1.0f; //nos aseguramos de no romper nada
     }
+	
+	void OnDisable() 
+	{
+		Time.timeScale = 1.0f; //lo mismo de arriba	
+	}
 
     // Update is called once per frame
     void Update()

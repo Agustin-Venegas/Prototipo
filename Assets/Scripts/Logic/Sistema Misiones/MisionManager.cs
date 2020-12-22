@@ -14,11 +14,19 @@ public class MisionManager : MonoBehaviour
     public bool accomplished = false;
 
     public static MisionManager Instance;
+	
+	public UnityEvent OnStart;
 
     void Start()
     {
         Instance = this;
     }
+	
+	void OnEnable() 
+	{
+		Instance = this;
+		OnStart.Invoke();
+	}
 
     // Update is called once per frame
     void Update()

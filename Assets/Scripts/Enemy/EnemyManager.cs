@@ -13,6 +13,11 @@ public class EnemyManager : MonoBehaviour
     {
         Instance = this;
     }
+	
+	void OnEnable() 
+	{
+		Instance = this;
+	}
 
     // Update is called once per frame
     void Update()
@@ -33,4 +38,15 @@ public class EnemyManager : MonoBehaviour
             }
         }
     }
+	
+	public void AlertarToCenter()
+	{
+		foreach (EnemyObject e in list)
+		{
+            if (e.IsAlive()) //si esta vivo
+            {
+				e.PasarSospechar(transform.position);
+            }
+        }
+	}
 }

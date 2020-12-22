@@ -79,9 +79,9 @@ public class PlayerObject : MonoBehaviour, IHurtable
 
     public void Heal(int h)
     {
-        if (hp + h > 100)
+        if (hp + h > HP_Max)
         {
-            hp = 100;
+            hp = HP_Max;
         }
         else
         {

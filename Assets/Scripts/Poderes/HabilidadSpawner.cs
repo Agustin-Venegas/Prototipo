@@ -10,6 +10,8 @@ public class HabilidadSpawner : HabilidadEspecial
     float timer = 0f;
     float cooldown = 0f;
 
+	GameObject spawned;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -36,6 +38,11 @@ public class HabilidadSpawner : HabilidadEspecial
         }
     }
 
+	void OnDisable() 
+	{
+		if (spawned != null) Destroy(spawned);
+	}
+	
     public override void Activate()
     {
         base.Activate();
@@ -44,13 +51,13 @@ public class HabilidadSpawner : HabilidadEspecial
         {
             if (timer <= 0)
             {
-                Instantiate(prefab, transform.position + transform.up, transform.rotation);
+                spawned = Instantiate(prefab, transform.position + transform.up, transform.rotation);
                 timer = cooldown;
             }
         }
         else
         {
-            Instantiate(prefab, transform.position + transform.up, transform.rotation);
+            spawned = Instantiate(prefab, transform.position + transform.up, transform.rotation);
         }
     }
 }

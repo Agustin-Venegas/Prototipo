@@ -36,6 +36,7 @@ public class PlayerAttack : MonoBehaviour
     {
         Instance = this;
         soundManager = SoundManager.instance;
+		
         if (soundManager == null)
         {
             Debug.LogError("No audio manager founded in the scene");
@@ -48,7 +49,7 @@ public class PlayerAttack : MonoBehaviour
         if (timerGolpe > 0) timerGolpe -= Time.deltaTime;
         if (timerShoot > 0) timerShoot -= Time.deltaTime;
 
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButton("Fire1"))
         {
             
             if (attack != null)
