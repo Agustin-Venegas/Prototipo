@@ -31,7 +31,7 @@ public class PlayerAttack : MonoBehaviour
     public float Cooldown = 0.5f;
 
     private SoundManager soundManager;
-
+    public string ActionSounds;
     void Start()
     {
         Instance = this;
@@ -72,12 +72,22 @@ public class PlayerAttack : MonoBehaviour
                     {
                         isHitting = true;
                         timerGolpe = Cooldown;
-                        soundManager.PlaySound("Punch1");
+                        //soundManager.PlaySound("Punch1");
                     }
                     
                 }
                 if (ActivateSpecialOnShoot) special.Activate();
             }
+
+            if (isHitting)
+            {
+                soundManager.PlaySound("Punch1");
+            }
+            else
+            {
+                soundManager.PlaySound(ActionSounds);
+            }
+            
             UpdateHUD();
         }
 
@@ -117,6 +127,7 @@ public class PlayerAttack : MonoBehaviour
             {
                 case "S & W PDW": //Pisola
                     WithWeapon = 1;
+                    ActionSounds = "GunShoot";
                     break;
 					
 				case "Particle Projection Cannon": //Rifle de francotirador
