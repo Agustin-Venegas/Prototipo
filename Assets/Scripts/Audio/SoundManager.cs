@@ -44,6 +44,8 @@ public class SoundManager : MonoBehaviour
 {
 
     public static SoundManager instance;
+	
+	public bool mute = false;
 
     [SerializeField]
     Sound[] sounds;
@@ -85,12 +87,12 @@ public class SoundManager : MonoBehaviour
         {
             if (sounds[i].name == _name)
             {
-                sounds[i].Play();
+                if (!mute) sounds[i].Play();
                 return;
             }
         }
 
-        Debug.LogWarning("AudioManager: Sound not found in lis. " + _name);
+        Debug.LogWarning("AudioManager: Sound not found in list. " + _name);
     }
 
     public void StopSound(string _name)

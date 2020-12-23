@@ -1,9 +1,13 @@
 fileFormatVersion: 2
+<<<<<<< Updated upstream
+guid: 435a9a86df1d4cb2da60ce4d92a77100
+=======
 <<<<<<< Updated upstream:Assets/Animations/player.meta
 guid: 0042a96bb6b6f6843b7315feb635aca6
 =======
 guid: 435a9a86df1d4cb2da60ce4d92a77100
 >>>>>>> Stashed changes:Assets/Audio/bin.meta
+>>>>>>> Stashed changes
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

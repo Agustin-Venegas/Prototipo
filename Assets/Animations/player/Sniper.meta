@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< Updated upstream:Assets/Animations/player/Sniper.meta
 guid: 117fe584fe848834396acd50dd2733de
+=======
+guid: da53cd63a21efa5429d6aff25151ca40
+>>>>>>> Stashed changes:Assets/SpritesPrototipo/Sprites Player/Desarmado_sprites/Idle_SinArmas/Materials.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
