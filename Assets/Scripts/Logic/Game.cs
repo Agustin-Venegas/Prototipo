@@ -19,6 +19,7 @@ public class Game : MonoBehaviour
     public int active_index;
 
     [Header("SaveData")]
+	public string name;
     public int Desbloqueos = 1;
     public List<float> TiempoNivel = new List<float>(); //almacena los tiempos de cada nivel
     public string lastScene = null; //checkpoints
@@ -70,6 +71,7 @@ public class Game : MonoBehaviour
 
     public void LoadActive()
     {
+		name = ActiveSave.name;
         Desbloqueos = ActiveSave.Desbloqueos;
         TiempoNivel = ActiveSave.TiempoNivel;
 		lastScene = ActiveSave.lastScene;

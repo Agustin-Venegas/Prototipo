@@ -12,6 +12,11 @@ public class LoadUI : MonoBehaviour
     public Button Boton2;
     public Button Boton3;
 
+	[Header("Titulos")]
+    public Text tit1;
+    public Text tit2;
+    public Text tit3;
+	
     [Header("Textos")]
     public Text info1;
     public Text info2;
@@ -21,6 +26,7 @@ public class LoadUI : MonoBehaviour
     {
         if (Game.Instance.save1 != null && Game.Instance.save1.lastScene != "")
         {
+			tit1.text = Game.Instance.save1.name;
             info1.text = Game.Instance.save1.CrearJason();
         }
         else
@@ -31,6 +37,7 @@ public class LoadUI : MonoBehaviour
 
         if (Game.Instance.save2 != null && Game.Instance.save2.lastScene != "")
         {
+			tit2.text = Game.Instance.save2.name;
             info2.text = Game.Instance.save2.CrearJason();
         }
         else
@@ -41,6 +48,7 @@ public class LoadUI : MonoBehaviour
 
         if (Game.Instance.save3 != null && Game.Instance.save3.lastScene != "")
         {
+			tit3.text = Game.Instance.save3.name;
             info3.text = Game.Instance.save3.CrearJason();
         }
         else
