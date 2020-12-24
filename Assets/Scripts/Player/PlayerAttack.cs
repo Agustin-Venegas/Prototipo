@@ -32,6 +32,7 @@ public class PlayerAttack : MonoBehaviour
 
     private SoundManager soundManager;
     public string ActionSounds;
+	
     void Start()
     {
         Instance = this;
@@ -58,16 +59,28 @@ public class PlayerAttack : MonoBehaviour
                 {
                     attack.Shoot(firePoint);
                     DefaultAttack.Shoot();
+					
                     if (WithWeapon == 4)
                     {
                         isHitting = true;
                         timerGolpe = Cooldown;
                         //soundManager.PlaySound("Punch1");
                     }
+					
                     isShooting = true;
                     timerShoot = Cooldown;
                 }
                 
+					if (isHitting)
+					{
+						soundManager.PlaySound("Punch1");
+					}
+					else
+					{
+						soundManager.PlaySound(ActionSounds);
+					}
+				
+				
                 if (ActivateSpecialOnShoot) special.Activate();
             }
             else
@@ -81,18 +94,18 @@ public class PlayerAttack : MonoBehaviour
                         timerGolpe = Cooldown;
                         //soundManager.PlaySound("Punch1");
                     }
+					
+					if (isHitting)
+					{
+						soundManager.PlaySound("Punch1");
+					}	
+					else
+					{
+						soundManager.PlaySound(ActionSounds);
+					}
                     
                 }
                 if (ActivateSpecialOnShoot) special.Activate();
-            }
-
-            if (isHitting)
-            {
-                soundManager.PlaySound("Punch1");
-            }
-            else
-            {
-                soundManager.PlaySound(ActionSounds);
             }
             
             UpdateHUD();
