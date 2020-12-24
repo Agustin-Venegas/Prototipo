@@ -26,29 +26,25 @@ public class PlayerThoth_Animation_Manager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        switch (playerAttack.WithWeapon)
-        {
-            case 0:
-                if (!playerAttack.isHitting)
-                {
-                    if (!playerMovements.isWalking)
-                    {
-                        ChangeAnimationState(PLAYER_IDLE_SIN_ARMAS);
-                    }
-                    else
-                    {
-                        ChangeAnimationState(PLAYER_WALK_SIN_ARMAS);
-                    }
-                }
-                else
-                {
-                    ChangeAnimationState(PLAYERTHOTH_HIT);
-
-                }
-                break;
-        }
+        
             
-               
+        if (!playerAttack.isHitting)
+        {
+            if (!playerMovements.isWalking)
+            {
+                ChangeAnimationState(PLAYER_IDLE_SIN_ARMAS);
+            }
+            else
+            {
+                ChangeAnimationState(PLAYER_WALK_SIN_ARMAS);
+            }
+        }
+        else
+        {
+            ChangeAnimationState(PLAYERTHOTH_HIT);
+
+        }
+    
     }
 
     void ChangeAnimationState(string newState)

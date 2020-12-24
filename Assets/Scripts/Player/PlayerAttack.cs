@@ -57,6 +57,13 @@ public class PlayerAttack : MonoBehaviour
                 if (attack.CanShoot())   
                 {
                     attack.Shoot(firePoint);
+                    DefaultAttack.Shoot();
+                    if (WithWeapon == 4)
+                    {
+                        isHitting = true;
+                        timerGolpe = Cooldown;
+                        //soundManager.PlaySound("Punch1");
+                    }
                     isShooting = true;
                     timerShoot = Cooldown;
                 }
@@ -136,6 +143,10 @@ public class PlayerAttack : MonoBehaviour
 
                 case "Bate_de_Beisbol":
                     WithWeapon = 3;
+                    break;
+
+                case "Palanca":
+                    WithWeapon = 4;
                     break;
             }
 
