@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [System.Serializable]
 public class Sound
@@ -20,6 +21,9 @@ public class Sound
 
     private AudioSource source;
 
+    public bool Check { get { return source.isPlaying; } }
+
+
     public void SetSource (AudioSource _source)
     {
         source = _source;
@@ -38,6 +42,8 @@ public class Sound
     {
         source.Stop();
     }
+
+
 }
 
 public class SoundManager : MonoBehaviour
@@ -69,16 +75,98 @@ public class SoundManager : MonoBehaviour
                 sounds[i].SetSource(_go.AddComponent<AudioSource>());
                 DontDestroyOnLoad(_go);
             }
-
-            PlaySound("Music");
+            SceneManager.sceneLoaded += AlCargarEscena;
         }
 
-        
     }
 
     void Start ()
     {
         
+    }
+
+    public void AlCargarEscena(Scene scene, LoadSceneMode loadSceneMode)
+    {
+        //Sonido del menu
+        if (scene.name == "Intro")
+        {
+            if (sounds[1].Check == false)
+            {
+                PlaySound("Menu");
+            }
+        }
+        else
+        {
+            if (!(scene.name == "Creditos" || scene.name == "Instrucciones" || scene.name == "NuevaPartida" || scene.name == "Cargar"))
+            {
+                StopSound("Menu");
+            }
+        }
+
+        //Musica del primer nivel (Alcantarillas)
+        if (scene.name == "Protipo Nivel")
+        {
+            if (sounds[2].Check == false)
+            {
+                PlaySound("Alcantarillas");
+            }
+        }
+        else
+        {
+            StopSound("Alcantarillas");
+        }
+
+        //Musica del segundo nivel (Recuerdos de Thoth)
+        if (scene.name == "Recuerdo Toth")
+        {
+            if (sounds[3].Check == false)
+            {
+                PlaySound("Recuerdo Thoth");
+            }
+        }
+        else
+        {
+            StopSound("Recuerdo Thoth");
+        }
+
+        //Musica para el interludio entre los recuerdos de Thoth y la conversacion con Ares
+        if (scene.name == "Reunion con Ares")
+        {
+            if (sounds[4].Check == false)
+            {
+                PlaySound("Interludio 1");
+            }
+        }
+        else
+        {
+            StopSound("Interludio 1");
+        }
+
+        //Musica para la reunion con Ares
+        if (scene.name == "Reunion con Ares Interludio")
+        {
+            if (sounds[5].Check == false)
+            {
+                PlaySound("Reunion Ares");
+            }
+        }
+        else
+        {
+            StopSound("Reunion Ares");
+        }
+
+        //Musica para la mision que da Ares
+        if (scene.name == "Reunion con Ares Mision")
+        {
+            if (sounds[6].Check == false)
+            {
+                PlaySound("Mision Ares");
+            }
+        }
+        else
+        {
+            StopSound("Mision Ares");
+        }
     }
 
     public void PlaySound (string _name)
