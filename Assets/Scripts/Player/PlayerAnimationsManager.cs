@@ -19,6 +19,7 @@ public class PlayerAnimationsManager : MonoBehaviour
     const string PLAYER_SNIPER_SHOOT = "Sniper_Shoot";
     const string PLAYER_SNIPER_WALK = "Sniper_Walk";
     const string PLAYER_SNIPER_IDLE = "Sniper_Idle";
+    const string PLAYER_HIT_PALANCA = "Hit_Palanca";
 
     PlayerMovements playerMovements;
     PlayerAttack playerAttack;
@@ -97,6 +98,24 @@ public class PlayerAnimationsManager : MonoBehaviour
                 else
                 {
                     ChangeAnimationState(PLAYER_SNIPER_SHOOT);
+                }
+                break;
+
+            case 4:
+                if (!playerAttack.isHitting)
+                {
+                    if (!playerMovements.isWalking)
+                    {
+                        ChangeAnimationState(PLAYER_IDLE_SIN_ARMAS);
+                    }
+                    else
+                    {
+                        ChangeAnimationState(PLAYER_WALK_SIN_ARMAS);
+                    }
+                }
+                else
+                {
+                    ChangeAnimationState(PLAYER_HIT_PALANCA);
                 }
                 break;
         }

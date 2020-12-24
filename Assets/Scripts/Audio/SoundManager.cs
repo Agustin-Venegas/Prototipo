@@ -167,6 +167,19 @@ public class SoundManager : MonoBehaviour
         {
             StopSound("Mision Ares");
         }
+
+        //Musica para la habitacion blanca
+        if (scene.name == "Habitacion Blanca")
+        {
+            if (sounds[6].Check == false)
+            {
+                PlaySound("Habitacion Blanca");
+            }
+        }
+        else
+        {
+            StopSound("Habitacion Blanca");
+        }
     }
 
     public void PlaySound (string _name)
