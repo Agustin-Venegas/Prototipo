@@ -74,11 +74,11 @@ public class NewGameUI : MonoBehaviour
                 break;
             case 2:
                 Game.Instance.save2 = new GameSave();
-				Game.Instance.save1.name = nameInput.text;
+				Game.Instance.save2.name = nameInput.text;
                 break;
             case 3:
                 Game.Instance.save3 = new GameSave();
-				Game.Instance.save1.name = nameInput.text;
+				Game.Instance.save3.name = nameInput.text;
                 break;
         }
 

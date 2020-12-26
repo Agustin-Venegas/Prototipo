@@ -37,6 +37,19 @@ public class Sound
         source.pitch = pitch * (1 + Random.Range(-randomPitch / 2f, randomPitch / 2f));
         source.Play();
     }
+	
+	public void Play(float vol) 
+	{
+		source.volume = vol;
+		source.Play();
+	}
+	
+	public void Play(float vol, float p) 
+	{
+		source.volume = vol;
+		source.pitch = p;
+		source.Play();
+	}
 
     public void Stop()
     {
@@ -189,6 +202,21 @@ public class SoundManager : MonoBehaviour
             if (sounds[i].name == _name)
             {
                 if (!mute) sounds[i].Play();
+                return;
+            }
+        }
+
+        Debug.LogWarning("AudioManager: Sound not found in list. " + _name);
+    }
+	
+	
+	public void PlaySound (string _name, float v)
+    {
+        for (int i = 0; i < sounds.Length; i++)
+        {
+            if (sounds[i].name == _name)
+            {
+                if (!mute) sounds[i].Play(v);
                 return;
             }
         }

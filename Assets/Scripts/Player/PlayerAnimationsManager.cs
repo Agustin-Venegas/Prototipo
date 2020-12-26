@@ -20,6 +20,7 @@ public class PlayerAnimationsManager : MonoBehaviour
     const string PLAYER_SNIPER_WALK = "Sniper_Walk";
     const string PLAYER_SNIPER_IDLE = "Sniper_Idle";
     const string PLAYER_HIT_PALANCA = "Hit_Palanca";
+    const string PLAYER_HIT_SWORD = "PLAYER_PUNCH";
 
     PlayerMovements playerMovements;
     PlayerAttack playerAttack;
@@ -60,7 +61,8 @@ public class PlayerAnimationsManager : MonoBehaviour
                 }
                 else
                 {
-                    ChangeAnimationState(PLAYER_PUNCH);
+                    if (playerAttack.DefaultAttack.Descripcion == "Sword") ChangeAnimationState(PLAYER_HIT_SWORD);
+					else ChangeAnimationState(PLAYER_PUNCH);
                     //soundManager.PlaySound("Punch1");
                 }
                 break;
