@@ -103,6 +103,7 @@ public class PlayerAnimationsManager : MonoBehaviour
                 }
                 break;
 
+			case 3:
             case 4:
                 if (!playerAttack.isHitting)
                 {

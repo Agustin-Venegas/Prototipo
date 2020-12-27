@@ -2,18 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-/*
- * Este script debe ponerse en aquellos objetos
- * que sean ataques melee cuerpo a cuerpo
- * Lo que hace es rotar  el gameobject, y si topa a algo
- * a lo que se le haga damage, le hara damage y se despawneara,
- * dependiendo de un booleano
- * Hay tiempo que dura y angulo que gira,
- * no recuerdo bien si el angulo era en rad o deg en unity :c
- * pero parece que estos wetas lo dejaron con degs
- * */
 
-public class MeleeBehaviour : MonoBehaviour
+public class ThotSwordBehaviour : MonoBehaviour
 {
     [Header("Manguito")]
     public Transform Manguito; //punto a rotar
@@ -70,6 +60,16 @@ public class MeleeBehaviour : MonoBehaviour
         }
     }
 	
-	public virtual void SpecialTrigger(Collider2D coll) {
+	public void SpecialTrigger(Collider2D coll) 
+	{
+		ProjectileBehaviour p = coll.gameObject.GetComponent<ProjectileBehaviour>();
+		
+		if (p != null) 
+		{
+			if (p.Damage < 20) 
+			{
+				coll.GetComponent<Rigidbody2D>().velocity = (PlayerObject.Instance.transform.up * p.SpeedMultiplier);
+			}
+		}
 	}
 }
